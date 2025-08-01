@@ -22,33 +22,20 @@
         
         <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
 
-            <!-- Circular Tracker Section -->
+            <!-- Circular Tracker Section (Daily) -->
             <div class="flex-1 flex flex-col items-center justify-center">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">DAILY TRACKER</h2>
                 <canvas id="circularTrackerCanvas" class="w-full max-w-lg aspect-square"></canvas>
+
+                <!-- Daily Habit Ledger -->
+                <div class="mt-4 w-full max-w-lg">
+                    <h4 class="text-lg font-medium text-gray-700 mb-2">Daily Habits</h4>
+                    <ul id="dailyHabitList" class="space-y-2 text-sm"></ul>
+                </div>
             </div>
 
-            <!-- Side Panel for Habit Info and Other Trackers -->
+            <!-- Side Panel for Weekly/Monthly Trackers -->
             <div class="flex-1 flex flex-col gap-8">
-
-                <!-- Habit Lists -->
-                <div>
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">YOUR HABITS</h2>
-                    <div class="flex flex-col md:flex-row gap-4 mt-6">
-                        <div class="flex-1">
-                            <h4 class="text-lg font-medium text-gray-700 mb-2">Daily</h4>
-                            <ul id="dailyHabitList" class="space-y-2 text-sm"></ul>
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="text-lg font-medium text-gray-700 mb-2">Weekly</h4>
-                            <ul id="weeklyHabitList" class="space-y-2 text-sm"></ul>
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="text-lg font-medium text-gray-700 mb-2">Monthly</h4>
-                            <ul id="monthlyHabitList" class="space-y-2 text-sm"></ul>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Weekly Habits Table -->
                 <div>
                     <h2 class="text-2xl font-semibold mb-4 text-gray-700">WEEKLY TRACKER</h2>
@@ -67,6 +54,11 @@
                             <!-- Weekly habits will be populated by JavaScript -->
                         </tbody>
                     </table>
+                    <!-- Weekly Habit Ledger -->
+                    <div class="mt-4">
+                        <h4 class="text-lg font-medium text-gray-700 mb-2">Weekly Habits</h4>
+                        <ul id="weeklyHabitList" class="space-y-2 text-sm"></ul>
+                    </div>
                 </div>
 
                 <!-- Monthly Habits Table -->
@@ -80,39 +72,52 @@
                             <!-- Monthly habits will be populated by JavaScript -->
                         </tbody>
                     </table>
+                    <!-- Monthly Habit Ledger -->
+                    <div class="mt-4">
+                        <h4 class="text-lg font-medium text-gray-700 mb-2">Monthly Habits</h4>
+                        <ul id="monthlyHabitList" class="space-y-2 text-sm"></ul>
+                    </div>
                 </div>
-                
-                <!-- Habit Addition Section (Moved to the bottom) -->
-                <div>
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">ADD NEW HABIT</h2>
-                    
-                    <!-- Add Daily Habit -->
-                    <div class="mb-6 border-b pb-4 border-gray-200">
-                        <h3 class="text-xl font-medium mb-2 text-gray-600">Daily Habit</h3>
-                        <div class="flex flex-col md:flex-row gap-2">
-                            <input type="text" id="dailyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+            </div>
+        </div>
+
+        <!-- Habit Addition Section (Moved to the bottom) -->
+        <div class="mt-12 pt-8 border-t-2 border-gray-100">
+            <h2 class="text-2xl font-semibold mb-4 text-gray-700">ADD NEW HABIT</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Add Daily Habit -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-medium mb-4 text-gray-600">Daily Habit</h3>
+                    <div class="flex flex-col gap-2">
+                        <input type="text" id="dailyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <div class="flex items-center gap-2">
                             <input type="color" id="dailyHabitColor" value="#5e1b89" class="w-12 h-10 border rounded-md">
-                            <button id="addDailyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                            <button id="addDailyHabitBtn" class="flex-1 px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Add Weekly Habit -->
-                    <div class="mb-6 border-b pb-4 border-gray-200">
-                        <h3 class="text-xl font-medium mb-2 text-gray-600">Weekly Habit</h3>
-                        <div class="flex flex-col md:flex-row gap-2">
-                            <input type="text" id="weeklyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                <!-- Add Weekly Habit -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-medium mb-4 text-gray-600">Weekly Habit</h3>
+                    <div class="flex flex-col gap-2">
+                        <input type="text" id="weeklyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <div class="flex items-center gap-2">
                             <input type="color" id="weeklyHabitColor" value="#ffc300" class="w-12 h-10 border rounded-md">
-                            <button id="addWeeklyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                            <button id="addWeeklyHabitBtn" class="flex-1 px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Add Monthly Habit -->
-                    <div class="mb-6">
-                        <h3 class="text-xl font-medium mb-2 text-gray-600">Monthly Habit</h3>
-                        <div class="flex flex-col md:flex-row gap-2">
-                            <input type="text" id="monthlyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                <!-- Add Monthly Habit -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-medium mb-4 text-gray-600">Monthly Habit</h3>
+                    <div class="flex flex-col gap-2">
+                        <input type="text" id="monthlyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                        <div class="flex items-center gap-2">
                             <input type="color" id="monthlyHabitColor" value="#0ead69" class="w-12 h-10 border rounded-md">
-                            <button id="addMonthlyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                            <button id="addMonthlyHabitBtn" class="flex-1 px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
                         </div>
                     </div>
                 </div>
@@ -137,7 +142,7 @@
             let config = JSON.parse(localStorage.getItem('habitTrackerConfig')) || {
                 months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 dailyHabits: [
-                    { id: 'yoga', name: 'Yoga 20 mins', color: '#e63946' },
+                    { id: 'Exercise', name: 'Exercise 20 mins', color: '#e63946' },
                     { id: 'walk', name: 'Walk 30 mins', color: '#f77f00' },
                     { id: 'dishes', name: 'Wash dishes', color: '#ffc300' },
                     { id: 'sleep', name: '8 hours of sleep', color: '#0ead69' },
@@ -145,19 +150,21 @@
                     { id: 'water', name: '8 glasses of water', color: '#0077b6' },
                     { id: 'journaling', name: 'Morning journaling', color: '#03045e' },
                     { id: 'wakeup', name: '7 am wake up', color: '#6a0572' },
-                    { id: 'dogwalk', name: 'Dog walking', color: '#5e1b89' },
-                    { id: 'pajamas', name: 'Wear PJs', color: '#2e294e' }
+                    { id: 'meditation', name: 'Meditation 10 mins', color: '#5e1b89' },
+                    { id: 'no_sugar', name: 'No sugar today', color: '#8d99ae' }
                 ],
                 weeklyHabits: [
                     { id: 'family_time', name: 'Family Time', color: '#e63946' },
                     { id: 'home_cleaning', name: 'Home Cleaning', color: '#f77f00' },
-                    { id: 'dog_park', name: 'Dog park', color: '#ffc300' },
-                    { id: 'massage', name: 'Massage', color: '#0ead69' },
-                    { id: 'haircut', name: 'Haircut', color: '#2a9d8f' },
-                    { id: 'dermatologist', name: 'Dermatologist', color: '#03045e' }
+                    { id: 'grocery_shopping', name: 'Grocery Shopping', color: '#ffc300' },
+                    { id: 'laundry', name: 'Laundry', color: '#0ead69' },
+                    { id: 'self_care', name: 'Self Care', color: '#0077b6' },
+                    { id: 'meal_prep', name: 'Meal Prep', color: '#03045e' },
+                    { id: 'social_media_break', name: 'Social Media Break', color: '#6a0572' },
+                    { id: 'massage', name: 'Massage', color: '#0ead69' }
                 ],
                 monthlyHabits: [
-                    { id: 'hiking', name: 'Hiking', color: '#0ead69' },
+                    { id: 'upskill', name: 'Upskill', color: '#0ead69' },
                     { id: 'weekend_getaway', name: 'Weekend getaway', color: '#2a9d8f' }
                 ]
             };
@@ -190,6 +197,13 @@
                 const centerY = canvas.height / 2;
                 // Expanded circumference for easier clicking
                 const maxRadius = Math.min(centerX, centerY) - padding * 2;
+                
+                // Guard clause to prevent drawing when canvas is too small, which can lead to negative radii
+                if (maxRadius <= 0) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    return;
+                }
+
                 const innerRadius = maxRadius * 0.4; 
                 const outerRadius = maxRadius;
                 
@@ -262,6 +276,9 @@
                 const centerX = canvas.width / 2;
                 const centerY = canvas.height / 2;
                 const maxRadius = Math.min(centerX, centerY) - padding * 2;
+                // Don't proceed if canvas size is too small
+                if (maxRadius <= 0) return;
+
                 const innerRadius = maxRadius * 0.4;
                 const outerRadius = maxRadius;
                 const numHabits = config.dailyHabits.length;
