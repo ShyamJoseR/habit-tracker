@@ -30,52 +30,20 @@
             <!-- Side Panel for Habit Info and Other Trackers -->
             <div class="flex-1 flex flex-col gap-8">
 
-                <!-- Habit Management Section -->
+                <!-- Habit Lists -->
                 <div>
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">HABIT MANAGEMENT</h2>
-                    
-                    <!-- Add Daily Habit -->
-                    <div class="mb-6 border-b pb-4 border-gray-200">
-                        <h3 class="text-xl font-medium mb-2 text-gray-600">Add Daily Habit</h3>
-                        <div class="flex flex-col md:flex-row gap-2">
-                            <input type="text" id="dailyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-                            <input type="color" id="dailyHabitColor" value="#5e1b89" class="w-12 h-10 border rounded-md">
-                            <button id="addDailyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
-                        </div>
-                    </div>
-
-                    <!-- Add Weekly Habit -->
-                    <div class="mb-6 border-b pb-4 border-gray-200">
-                        <h3 class="text-xl font-medium mb-2 text-gray-600">Add Weekly Habit</h3>
-                        <div class="flex flex-col md:flex-row gap-2">
-                            <input type="text" id="weeklyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-                            <input type="color" id="weeklyHabitColor" value="#ffc300" class="w-12 h-10 border rounded-md">
-                            <button id="addWeeklyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
-                        </div>
-                    </div>
-
-                    <!-- Add Monthly Habit -->
-                    <div class="mb-6">
-                        <h3 class="text-xl font-medium mb-2 text-gray-600">Add Monthly Habit</h3>
-                        <div class="flex flex-col md:flex-row gap-2">
-                            <input type="text" id="monthlyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
-                            <input type="color" id="monthlyHabitColor" value="#0ead69" class="w-12 h-10 border rounded-md">
-                            <button id="addMonthlyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
-                        </div>
-                    </div>
-
-                    <!-- Habit Lists -->
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">YOUR HABITS</h2>
                     <div class="flex flex-col md:flex-row gap-4 mt-6">
                         <div class="flex-1">
-                            <h4 class="text-lg font-medium text-gray-700 mb-2">Daily Habits</h4>
+                            <h4 class="text-lg font-medium text-gray-700 mb-2">Daily</h4>
                             <ul id="dailyHabitList" class="space-y-2 text-sm"></ul>
                         </div>
                         <div class="flex-1">
-                            <h4 class="text-lg font-medium text-gray-700 mb-2">Weekly Habits</h4>
+                            <h4 class="text-lg font-medium text-gray-700 mb-2">Weekly</h4>
                             <ul id="weeklyHabitList" class="space-y-2 text-sm"></ul>
                         </div>
                         <div class="flex-1">
-                            <h4 class="text-lg font-medium text-gray-700 mb-2">Monthly Habits</h4>
+                            <h4 class="text-lg font-medium text-gray-700 mb-2">Monthly</h4>
                             <ul id="monthlyHabitList" class="space-y-2 text-sm"></ul>
                         </div>
                     </div>
@@ -83,7 +51,7 @@
 
                 <!-- Weekly Habits Table -->
                 <div>
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">WEEKLY HABITS</h2>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">WEEKLY TRACKER</h2>
                     <table class="w-full text-center border-collapse rounded-xl overflow-hidden shadow-sm">
                         <thead class="bg-gray-200">
                             <tr>
@@ -103,7 +71,7 @@
 
                 <!-- Monthly Habits Table -->
                 <div>
-                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">MONTHLY HABITS</h2>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">MONTHLY TRACKER</h2>
                     <table class="w-full text-center border-collapse rounded-xl overflow-hidden shadow-sm">
                         <thead id="monthlyHabitsHeader" class="bg-gray-200">
                             <!-- Monthly habits header will be populated by JavaScript -->
@@ -112,6 +80,41 @@
                             <!-- Monthly habits will be populated by JavaScript -->
                         </tbody>
                     </table>
+                </div>
+                
+                <!-- Habit Addition Section (Moved to the bottom) -->
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">ADD NEW HABIT</h2>
+                    
+                    <!-- Add Daily Habit -->
+                    <div class="mb-6 border-b pb-4 border-gray-200">
+                        <h3 class="text-xl font-medium mb-2 text-gray-600">Daily Habit</h3>
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <input type="text" id="dailyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <input type="color" id="dailyHabitColor" value="#5e1b89" class="w-12 h-10 border rounded-md">
+                            <button id="addDailyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Add Weekly Habit -->
+                    <div class="mb-6 border-b pb-4 border-gray-200">
+                        <h3 class="text-xl font-medium mb-2 text-gray-600">Weekly Habit</h3>
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <input type="text" id="weeklyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <input type="color" id="weeklyHabitColor" value="#ffc300" class="w-12 h-10 border rounded-md">
+                            <button id="addWeeklyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Add Monthly Habit -->
+                    <div class="mb-6">
+                        <h3 class="text-xl font-medium mb-2 text-gray-600">Monthly Habit</h3>
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <input type="text" id="monthlyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <input type="color" id="monthlyHabitColor" value="#0ead69" class="w-12 h-10 border rounded-md">
+                            <button id="addMonthlyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
