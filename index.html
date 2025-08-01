@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Habit Tracker</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* A light gray background */
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-6 md:p-10 border-2 border-gray-100">
+        <!-- Main Header -->
+        <h1 class="text-4xl md:text-5xl font-bold text-center text-gray-800 mb-8 tracking-wide">HABIT TRACKER</h1>
+        
+        <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+
+            <!-- Circular Tracker Section -->
+            <div class="flex-1 flex flex-col items-center justify-center">
+                <canvas id="circularTrackerCanvas" class="w-full max-w-lg aspect-square"></canvas>
+            </div>
+
+            <!-- Side Panel for Habit Info and Other Trackers -->
+            <div class="flex-1 flex flex-col gap-8">
+
+                <!-- Habit Management Section -->
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">HABIT MANAGEMENT</h2>
+                    
+                    <!-- Add Daily Habit -->
+                    <div class="mb-6 border-b pb-4 border-gray-200">
+                        <h3 class="text-xl font-medium mb-2 text-gray-600">Add Daily Habit</h3>
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <input type="text" id="dailyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <input type="color" id="dailyHabitColor" value="#5e1b89" class="w-12 h-10 border rounded-md">
+                            <button id="addDailyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Add Weekly Habit -->
+                    <div class="mb-6 border-b pb-4 border-gray-200">
+                        <h3 class="text-xl font-medium mb-2 text-gray-600">Add Weekly Habit</h3>
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <input type="text" id="weeklyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <input type="color" id="weeklyHabitColor" value="#ffc300" class="w-12 h-10 border rounded-md">
+                            <button id="addWeeklyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Add Monthly Habit -->
+                    <div class="mb-6">
+                        <h3 class="text-xl font-medium mb-2 text-gray-600">Add Monthly Habit</h3>
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <input type="text" id="monthlyHabitName" placeholder="Habit Name" class="flex-1 px-4 py-2 border rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+                            <input type="color" id="monthlyHabitColor" value="#0ead69" class="w-12 h-10 border rounded-md">
+                            <button id="addMonthlyHabitBtn" class="px-4 py-2 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 transition-colors">Add</button>
+                        </div>
+                    </div>
+
+                    <!-- Habit Lists -->
+                    <div class="flex flex-col md:flex-row gap-4 mt-6">
+                        <div class="flex-1">
+                            <h4 class="text-lg font-medium text-gray-700 mb-2">Daily Habits</h4>
+                            <ul id="dailyHabitList" class="space-y-2 text-sm"></ul>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-medium text-gray-700 mb-2">Weekly Habits</h4>
+                            <ul id="weeklyHabitList" class="space-y-2 text-sm"></ul>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="text-lg font-medium text-gray-700 mb-2">Monthly Habits</h4>
+                            <ul id="monthlyHabitList" class="space-y-2 text-sm"></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weekly Habits Table -->
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">WEEKLY HABITS</h2>
+                    <table class="w-full text-center border-collapse rounded-xl overflow-hidden shadow-sm">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th class="p-3 font-semibold text-left">Habit</th>
+                                <th class="p-3 font-semibold">W1</th>
+                                <th class="p-3 font-semibold">W2</th>
+                                <th class="p-3 font-semibold">W3</th>
+                                <th class="p-3 font-semibold">W4</th>
+                                <th class="p-3 font-semibold">W5</th>
+                            </tr>
+                        </thead>
+                        <tbody id="weeklyHabitsTable" class="bg-white">
+                            <!-- Weekly habits will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Monthly Habits Table -->
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-700">MONTHLY HABITS</h2>
+                    <table class="w-full text-center border-collapse rounded-xl overflow-hidden shadow-sm">
+                        <thead id="monthlyHabitsHeader" class="bg-gray-200">
+                            <!-- Monthly habits header will be populated by JavaScript -->
+                        </thead>
+                        <tbody id="monthlyHabitsTable" class="bg-white">
+                            <!-- Monthly habits will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('circularTrackerCanvas');
+            const ctx = canvas.getContext('2d');
+            const weeklyHabitsTable = document.getElementById('weeklyHabitsTable');
+            const monthlyHabitsHeader = document.getElementById('monthlyHabitsHeader');
+            const monthlyHabitsTable = document.getElementById('monthlyHabitsTable');
+            const dailyHabitList = document.getElementById('dailyHabitList');
+            const weeklyHabitList = document.getElementById('weeklyHabitList');
+            const monthlyHabitList = document.getElementById('monthlyHabitList');
+
+            // --- CONFIGURATION OBJECT ---
+            // This object holds all the customizable data for the habit tracker.
+            // It will be loaded from local storage or use these defaults.
+            let config = JSON.parse(localStorage.getItem('habitTrackerConfig')) || {
+                months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                dailyHabits: [
+                    { id: 'yoga', name: 'Yoga 20 mins', color: '#e63946' },
+                    { id: 'walk', name: 'Walk 30 mins', color: '#f77f00' },
+                    { id: 'dishes', name: 'Wash dishes', color: '#ffc300' },
+                    { id: 'sleep', name: '8 hours of sleep', color: '#0ead69' },
+                    { id: 'reading', name: 'Reading 20 pages', color: '#2a9d8f' },
+                    { id: 'water', name: '8 glasses of water', color: '#0077b6' },
+                    { id: 'journaling', name: 'Morning journaling', color: '#03045e' },
+                    { id: 'wakeup', name: '7 am wake up', color: '#6a0572' },
+                    { id: 'dogwalk', name: 'Dog walking', color: '#5e1b89' },
+                    { id: 'pajamas', name: 'Wear PJs', color: '#2e294e' }
+                ],
+                weeklyHabits: [
+                    { id: 'family_time', name: 'Family Time', color: '#e63946' },
+                    { id: 'home_cleaning', name: 'Home Cleaning', color: '#f77f00' },
+                    { id: 'dog_park', name: 'Dog park', color: '#ffc300' },
+                    { id: 'massage', name: 'Massage', color: '#0ead69' },
+                    { id: 'haircut', name: 'Haircut', color: '#2a9d8f' },
+                    { id: 'dermatologist', name: 'Dermatologist', color: '#03045e' }
+                ],
+                monthlyHabits: [
+                    { id: 'hiking', name: 'Hiking', color: '#0ead69' },
+                    { id: 'weekend_getaway', name: 'Weekend getaway', color: '#2a9d8f' }
+                ]
+            };
+
+            // Local storage keys for habit progress
+            const dailyDataKey = 'dailyHabitTrackerData';
+            const weeklyDataKey = 'weeklyHabitTrackerData';
+            const monthlyDataKey = 'monthlyHabitTrackerData';
+
+            // Data structure to hold the state of the habits
+            let dailyData = JSON.parse(localStorage.getItem(dailyDataKey)) || {};
+            let weeklyData = JSON.parse(localStorage.getItem(weeklyDataKey)) || {};
+            let monthlyData = JSON.parse(localStorage.getItem(monthlyDataKey)) || {};
+
+            // Canvas drawing parameters
+            const numDaysInMonth = 31;
+            const circleRadius = 7;
+            const padding = 10;
+            // Define start and end angles to create a gap
+            const startAngle = 0.2 * Math.PI; 
+            const endAngle = 1.8 * Math.PI; 
+
+            // Function to draw the circular tracker
+            const drawCircularTracker = () => {
+                const rect = canvas.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                // Expanded circumference for easier clicking
+                const maxRadius = Math.min(centerX, centerY) - padding * 2;
+                const innerRadius = maxRadius * 0.4; 
+                const outerRadius = maxRadius;
+                
+                // Clear the canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Draw the main background arc
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, outerRadius, startAngle, endAngle, false);
+                ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true);
+                ctx.closePath();
+                ctx.fillStyle = '#f3f4f6';
+                ctx.fill();
+
+                // Draw the circles for each day and habit
+                const numHabits = config.dailyHabits.length;
+                const totalAngle = endAngle - startAngle;
+                
+                for (let i = 0; i < numHabits; i++) {
+                    const habit = config.dailyHabits[i];
+                    
+                    const ringWidth = (outerRadius - innerRadius) / numHabits;
+                    const ringInnerRadius = innerRadius + i * ringWidth;
+                    const ringOuterRadius = ringInnerRadius + ringWidth;
+                    
+                    for (let j = 0; j < numDaysInMonth; j++) {
+                        const angle = startAngle + (j / (numDaysInMonth - 1)) * totalAngle;
+                        const midRadius = (ringInnerRadius + ringOuterRadius) / 2;
+                        
+                        const x = centerX + midRadius * Math.cos(angle);
+                        const y = centerY + midRadius * Math.sin(angle);
+                        
+                        // Check if the habit for this day is completed
+                        const isCompleted = dailyData[habit.id]?.[j] === true;
+
+                        ctx.beginPath();
+                        ctx.arc(x, y, circleRadius, 0, Math.PI * 2);
+                        ctx.fillStyle = isCompleted ? habit.color : '#cbd5e1'; // gray-400
+                        ctx.fill();
+                        ctx.strokeStyle = '#94a3b8'; // gray-500
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+
+                // Draw the dates on the inner circumference
+                ctx.save();
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.font = '10px Inter, sans-serif';
+                ctx.fillStyle = '#6b7280'; // gray-500
+                const dateRadius = innerRadius - 15; // Position just inside the inner circumference
+                for (let j = 0; j < numDaysInMonth; j++) {
+                    const angle = startAngle + (j / (numDaysInMonth - 1)) * totalAngle;
+                    const x = centerX + dateRadius * Math.cos(angle);
+                    const y = centerY + dateRadius * Math.sin(angle);
+                    
+                    // Adjust text position slightly for better readability
+                    ctx.fillText(j + 1, x, y);
+                }
+                ctx.restore();
+            };
+
+            // Function to handle canvas clicks
+            const handleCanvasClick = (event) => {
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = event.clientX - rect.left;
+                const mouseY = event.clientY - rect.top;
+
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const maxRadius = Math.min(centerX, centerY) - padding * 2;
+                const innerRadius = maxRadius * 0.4;
+                const outerRadius = maxRadius;
+                const numHabits = config.dailyHabits.length;
+                const ringWidth = (outerRadius - innerRadius) / numHabits;
+
+                // Calculate which ring (habit) and which angle (day) was clicked
+                const dx = mouseX - centerX;
+                const dy = mouseY - centerY;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                let angle = Math.atan2(dy, dx);
+                if (angle < 0) angle += 2 * Math.PI;
+
+                if (dist > innerRadius && dist < outerRadius) {
+                    const habitIndex = Math.floor((dist - innerRadius) / ringWidth);
+                    
+                    // Adjust the angle to be within the new arc range for calculation
+                    const normalizedAngle = angle > startAngle && angle < endAngle ? angle : null;
+                    if (normalizedAngle === null) return;
+
+                    const dayIndex = Math.round(((normalizedAngle - startAngle) / (endAngle - startAngle)) * (numDaysInMonth - 1));
+                    
+                    if (habitIndex >= 0 && habitIndex < numHabits && dayIndex >= 0 && dayIndex < numDaysInMonth) {
+                        const habitId = config.dailyHabits[habitIndex].id;
+                        
+                        // Toggle the state
+                        if (!dailyData[habitId]) {
+                            dailyData[habitId] = {};
+                        }
+                        dailyData[habitId][dayIndex] = !dailyData[habitId][dayIndex];
+                        
+                        // Save to local storage and redraw
+                        localStorage.setItem(dailyDataKey, JSON.stringify(dailyData));
+                        drawCircularTracker();
+                    }
+                }
+            };
+            
+            // Function to populate the daily habit key list
+            const populateHabitLists = () => {
+                dailyHabitList.innerHTML = '';
+                config.dailyHabits.forEach((habit, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center justify-between space-x-2';
+                    li.innerHTML = `
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full" style="background-color: ${habit.color};"></div>
+                            <span class="text-gray-700">${habit.name}</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700 delete-habit" data-type="daily" data-index="${index}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    `;
+                    dailyHabitList.appendChild(li);
+                });
+                
+                weeklyHabitList.innerHTML = '';
+                config.weeklyHabits.forEach((habit, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center justify-between space-x-2';
+                    li.innerHTML = `
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full" style="background-color: ${habit.color};"></div>
+                            <span class="text-gray-700">${habit.name}</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700 delete-habit" data-type="weekly" data-index="${index}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    `;
+                    weeklyHabitList.appendChild(li);
+                });
+                
+                monthlyHabitList.innerHTML = '';
+                config.monthlyHabits.forEach((habit, index) => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-center justify-between space-x-2';
+                    li.innerHTML = `
+                        <div class="flex items-center space-x-2">
+                            <div class="w-4 h-4 rounded-full" style="background-color: ${habit.color};"></div>
+                            <span class="text-gray-700">${habit.name}</span>
+                        </div>
+                        <button class="text-red-500 hover:text-red-700 delete-habit" data-type="monthly" data-index="${index}">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    `;
+                    monthlyHabitList.appendChild(li);
+                });
+
+                // Add event listeners for delete buttons
+                document.querySelectorAll('.delete-habit').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const type = e.currentTarget.dataset.type;
+                        const index = parseInt(e.currentTarget.dataset.index);
+                        
+                        if (type === 'daily') {
+                            config.dailyHabits.splice(index, 1);
+                        } else if (type === 'weekly') {
+                            config.weeklyHabits.splice(index, 1);
+                        } else if (type === 'monthly') {
+                            config.monthlyHabits.splice(index, 1);
+                        }
+                        
+                        localStorage.setItem('habitTrackerConfig', JSON.stringify(config));
+                        refreshAll();
+                    });
+                });
+            };
+
+            // Function to populate the weekly and monthly trackers
+            const populateTables = () => {
+                // Weekly tracker
+                weeklyHabitsTable.innerHTML = '';
+                config.weeklyHabits.forEach(habit => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-t border-gray-200 hover:bg-gray-50 transition-colors';
+                    row.innerHTML = `<td class="p-3 text-left">${habit.name}</td>`;
+                    for (let i = 0; i < 5; i++) {
+                        const cellId = `${habit.id}-w${i}`;
+                        const isCompleted = weeklyData[cellId] === true;
+                        const cell = document.createElement('td');
+                        cell.className = 'p-3 cursor-pointer';
+                        cell.innerHTML = `
+                            <div class="w-6 h-6 mx-auto rounded-full ${isCompleted ? '' : 'border-2 border-gray-400'}" style="background-color: ${isCompleted ? habit.color : 'transparent'};"></div>
+                        `;
+                        cell.addEventListener('click', () => {
+                            weeklyData[cellId] = !weeklyData[cellId];
+                            localStorage.setItem(weeklyDataKey, JSON.stringify(weeklyData));
+                            populateTables(); // Re-render the tables
+                        });
+                        row.appendChild(cell);
+                    }
+                    weeklyHabitsTable.appendChild(row);
+                });
+
+                // Monthly tracker
+                monthlyHabitsTable.innerHTML = '';
+                const currentMonthIndex = new Date().getMonth();
+                const currentMonthName = config.months[currentMonthIndex];
+                
+                // Dynamically create the monthly table header
+                monthlyHabitsHeader.innerHTML = `
+                    <tr>
+                        <th class="p-3 font-semibold text-left">Habit</th>
+                        <th class="p-3 font-semibold">${currentMonthName}</th>
+                    </tr>
+                `;
+
+                config.monthlyHabits.forEach(habit => {
+                    const row = document.createElement('tr');
+                    row.className = 'border-t border-gray-200 hover:bg-gray-50 transition-colors';
+                    row.innerHTML = `<td class="p-3 text-left">${habit.name}</td>`;
+                    
+                    // Create a single cell for the current month
+                    const cellId = `${habit.id}-m${currentMonthIndex}`;
+                    const isCompleted = monthlyData[cellId] === true;
+                    const cell = document.createElement('td');
+                    cell.className = 'p-3 cursor-pointer text-center';
+                    cell.innerHTML = `
+                        <input type="checkbox" class="form-checkbox h-5 w-5 rounded-md" ${isCompleted ? 'checked' : ''}>
+                    `;
+                    cell.addEventListener('click', () => {
+                        monthlyData[cellId] = !monthlyData[cellId];
+                        localStorage.setItem(monthlyDataKey, JSON.stringify(monthlyData));
+                        populateTables(); // Re-render the tables
+                    });
+                    row.appendChild(cell);
+                    
+                    monthlyHabitsTable.appendChild(row);
+                });
+            };
+
+            // Main refresh function
+            const refreshAll = () => {
+                populateHabitLists();
+                populateTables();
+                drawCircularTracker();
+            };
+
+            // Event listeners for adding habits
+            document.getElementById('addDailyHabitBtn').addEventListener('click', () => {
+                const nameInput = document.getElementById('dailyHabitName');
+                const colorInput = document.getElementById('dailyHabitColor');
+                const name = nameInput.value.trim();
+                const color = colorInput.value;
+                if (name) {
+                    const newId = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    config.dailyHabits.push({ id: newId, name: name, color: color });
+                    localStorage.setItem('habitTrackerConfig', JSON.stringify(config));
+                    nameInput.value = '';
+                    refreshAll();
+                }
+            });
+
+            document.getElementById('addWeeklyHabitBtn').addEventListener('click', () => {
+                const nameInput = document.getElementById('weeklyHabitName');
+                const colorInput = document.getElementById('weeklyHabitColor');
+                const name = nameInput.value.trim();
+                const color = colorInput.value;
+                if (name) {
+                    const newId = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    config.weeklyHabits.push({ id: newId, name: name, color: color });
+                    localStorage.setItem('habitTrackerConfig', JSON.stringify(config));
+                    nameInput.value = '';
+                    refreshAll();
+                }
+            });
+            
+            document.getElementById('addMonthlyHabitBtn').addEventListener('click', () => {
+                const nameInput = document.getElementById('monthlyHabitName');
+                const colorInput = document.getElementById('monthlyHabitColor');
+                const name = nameInput.value.trim();
+                const color = colorInput.value;
+                if (name) {
+                    const newId = name.toLowerCase().replace(/[^a-z0-9]/g, '');
+                    config.monthlyHabits.push({ id: newId, name: name, color: color });
+                    localStorage.setItem('habitTrackerConfig', JSON.stringify(config));
+                    nameInput.value = '';
+                    refreshAll();
+                }
+            });
+
+            // Initial setup
+            refreshAll();
+            
+            // Set up event listeners and initial draw
+            canvas.addEventListener('click', handleCanvasClick);
+            window.addEventListener('resize', drawCircularTracker);
+        });
+    </script>
+
+</body>
+</html>
