@@ -41,21 +41,24 @@
                 <!-- Weekly Habits Table -->
                 <div>
                     <h2 class="text-2xl font-semibold mb-4 text-gray-700">WEEKLY TRACKER</h2>
-                    <table class="w-full text-center border-collapse rounded-xl overflow-hidden shadow-sm">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="p-3 font-semibold text-left">Habit</th>
-                                <th class="p-3 font-semibold">W1</th>
-                                <th class="p-3 font-semibold">W2</th>
-                                <th class="p-3 font-semibold">W3</th>
-                                <th class="p-3 font-semibold">W4</th>
-                                <th class="p-3 font-semibold">W5</th>
-                            </tr>
-                        </thead>
-                        <tbody id="weeklyHabitsTable" class="bg-white">
-                            <!-- Weekly habits will be populated by JavaScript -->
-                        </tbody>
-                    </table>
+                    <!-- Added overflow-x-auto for mobile responsiveness -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border-collapse rounded-xl overflow-hidden shadow-sm">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="p-3 font-semibold text-left">Habit</th>
+                                    <th class="p-3 font-semibold">W1</th>
+                                    <th class="p-3 font-semibold">W2</th>
+                                    <th class="p-3 font-semibold">W3</th>
+                                    <th class="p-3 font-semibold">W4</th>
+                                    <th class="p-3 font-semibold">W5</th>
+                                </tr>
+                            </thead>
+                            <tbody id="weeklyHabitsTable" class="bg-white">
+                                <!-- Weekly habits will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- Weekly Habit Ledger -->
                     <div class="mt-4">
                         <h4 class="text-lg font-medium text-gray-700 mb-2">Weekly Habits</h4>
@@ -66,14 +69,17 @@
                 <!-- Monthly Habits Table -->
                 <div>
                     <h2 class="text-2xl font-semibold mb-4 text-gray-700">MONTHLY TRACKER</h2>
-                    <table class="w-full text-center border-collapse rounded-xl overflow-hidden shadow-sm">
-                        <thead id="monthlyHabitsHeader" class="bg-gray-200">
-                            <!-- Monthly habits header will be populated by JavaScript -->
-                        </thead>
-                        <tbody id="monthlyHabitsTable" class="bg-white">
-                            <!-- Monthly habits will be populated by JavaScript -->
-                        </tbody>
-                    </table>
+                    <!-- Added overflow-x-auto for mobile responsiveness -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border-collapse rounded-xl overflow-hidden shadow-sm">
+                            <thead id="monthlyHabitsHeader" class="bg-gray-200">
+                                <!-- Monthly habits header will be populated by JavaScript -->
+                            </thead>
+                            <tbody id="monthlyHabitsTable" class="bg-white">
+                                <!-- Monthly habits will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- Monthly Habit Ledger -->
                     <div class="mt-4">
                         <h4 class="text-lg font-medium text-gray-700 mb-2">Monthly Habits</h4>

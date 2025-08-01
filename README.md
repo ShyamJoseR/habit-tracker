@@ -1,4 +1,13 @@
 
+
+<p align="center">
+  <img src="https://img.shields.io/github/license/ShyamJoseR/habit-tracker?style=flat-square" alt="License">
+  <img src="https://img.shields.io/github/last-commit/ShyamJoseR/habit-tracker?style=flat-square" alt="Last Commit">
+  <img src="https://img.shields.io/github/issues/ShyamJoseR/habit-tracker?style=flat-square" alt="Issues">
+  <img src="https://img.shields.io/github/forks/ShyamJoseR/habit-tracker?style=flat-square" alt="Forks">
+  <img src="https://img.shields.io/github/stars/ShyamJoseR/habit-tracker?style=flat-square" alt="Stars">
+</p>
+
 # 🌱 Habit Tracker
 
 A simple, web-based habit tracker to help you build and maintain good habits.
